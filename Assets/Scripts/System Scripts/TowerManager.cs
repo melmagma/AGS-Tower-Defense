@@ -15,7 +15,7 @@ public class TowerManager : MonoBehaviour
     public BaseTower activeTower; //this is reference of the tower that the player is trying to place
 
     public Transform indicator; //the holographic/ghost preview that follows the players cursor
-    public bool isPlacing; 
+    public bool isPlacing;
 
     public LayerMask whatIsPlacement, whatIsObstacle; // to declare which layers are good for towers to be built on, and the layer that prevents it
 
@@ -46,13 +46,13 @@ public class TowerManager : MonoBehaviour
             }
             else if (Physics.Raycast(indicator.position + new Vector3(0f, -2f, 0f), Vector3.up, out hit, 10f, whatIsObstacle)) //disables placement if raycast detects obstacle layers
             {
-                indicator.gameObject.SetActive(false);
+                indicator.gameObject.SetActive(false); //might change it to show as a red holographic instead and SFX if player tries to build onto the pathway
             }
             else
             {
                 indicator.gameObject.SetActive(true);
 
-                UIController.instance.notEnoughMoneyWarning.SetActive(MoneyManager.instance.currentMoney < activeTower.cost); //if the player does not have enough currency, this will be shown
+                UIManager.instance.notEnoughMoneyWarning.SetActive(MoneyManager.instance.currentMoney < activeTower.cost); //if the player does not have enough currency, this will be shown
 
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -65,32 +65,30 @@ public class TowerManager : MonoBehaviour
 
                         indicator.gameObject.SetActive(false);
 
-                        UIController.instance.notEnoughMoneyWarning.SetActive(false);
+                        UIManager.instance.notEnoughMoneyWarning.SetActive(false);
 
                         AudioManager.instance.PlaySFX(8); //instantiates tower down and removes all the indicators
                     }
                 }
                 if (Input.GetMouseButtonDown(1))
                 {
-                        isPlacing = false;
+                    isPlacing = false;
 
-                        indicator.gameObject.SetActive(false);
+                    indicator.gameObject.SetActive(false);
 
-                        UIController.instance.notEnoughMoneyWarning.SetActive(false); //if player right clicks, the tower selection will also disappear so they can in a sense, "escape" from building it
-                    }
+                    UIManager.instance.notEnoughMoneyWarning.SetActive(false); //if player right clicks, the tower selection will also disappear so they can in a sense, "escape" from building it
                 }
             }
         }
     }
-
-    public void StartTowerPlacement(Tower towerToPlace)
+    public void StartTowerPlacement(BaseTower towerToPlace)
     {
         activeTower = towerToPlace;
 
         isPlacing = true;
 
         Destroy(indicator.gameObject); //removes the holographic/translucent view to actually place the tower
-        Tower placeTower = Instantiate(activeTower);
+        BaseTower placeTower = Instantiate(activeTower);
         placeTower.enabled = false;
         placeTower.GetComponent<Collider>().enabled = false; //disables thw tower script to stop it from scanning for enemies.
         indicator = placeTower.transform;
@@ -127,3 +125,5 @@ public class TowerManager : MonoBehaviour
         }
     }
 }
+
+
