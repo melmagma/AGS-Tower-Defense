@@ -558,84 +558,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &499067286
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 499067287}
-  - component: {fileID: 499067288}
-  m_Layer: 0
-  m_Name: CameraRig
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &499067287
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 499067286}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.39798, y: 0.46482, z: -1.53804}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &499067288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 499067286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e6464e160f77d24b97d5cc29b901bc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraRig
-  cameraTransform: {fileID: 330585546}
-  currentMode: 0
-  toggleKey: 34
-  topDownPitch: 90
-  topDownMinDistance: 12
-  topDownMaxDistance: 60
-  topDownAllowRotation: 0
-  topDownSnapYaw: 1
-  transitionSmoothing: 4
-  transitionDuration: 1
-  startYaw: 45
-  rotateKeySpeed: 90
-  rotateDragSpeed: 4
-  snapAngle: 90
-  pitch: 55
-  allowManualPitch: 0
-  minPitch: 35
-  maxPitch: 75
-  pitchDragSpeed: 2.5
-  tiltWithZoom: 1
-  pitchWhenZoomedIn: 40
-  pitchWhenZoomedOut: 65
-  startDistance: 18
-  minDistance: 8
-  maxDistance: 30
-  zoomSpeed: 4
-  panSpeed: 1.2
-  dragPanSpeed: 0.06
-  edgeScrolling: 0
-  edgeSize: 15
-  clampToBounds: 1
-  boundsCenter: {x: 0, y: 0}
-  boundsSize: {x: 24.5, y: 26.8}
-  smoothing: 12
 --- !u!1 &676500214
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,7 +600,7 @@ GameObject:
   - component: {fileID: 677976573}
   - component: {fileID: 677976572}
   m_Layer: 0
-  m_Name: WaveSpawner
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2009,4 +1931,3 @@ SceneRoots:
   - {fileID: 67369565778206475}
   - {fileID: 8842860006669637057}
   - {fileID: 677976573}
-  - {fileID: 499067287}
