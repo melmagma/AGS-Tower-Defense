@@ -9,20 +9,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.28328213
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.28328213
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.28328213
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.068926
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.62
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
       propertyPath: m_LocalRotation.x
@@ -30,11 +42,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -42,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08b22486add792b43bc5589832307933, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -83,5 +95,64 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08b22486add792b43bc5589832307933, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5940013460263176569}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08b22486add792b43bc5589832307933, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7435245308066870180}
   m_SourcePrefab: {fileID: 100100000, guid: 08b22486add792b43bc5589832307933, type: 3}
+--- !u!1 &3194569902107206972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 08b22486add792b43bc5589832307933, type: 3}
+  m_PrefabInstance: {fileID: 2347516387096533101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5940013460263176569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194569902107206972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 672468f0aa78cf044b37c8ff105ea327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseTower
+  damage: 30
+  hitType: 0
+  splashRadius: 1
+  canHitMetal: 0
+  canHitCamo: 0
+  canTargetDensest: 0
+  range: 3
+  fireRate: 0
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 0
+  enemiesInRange: []
+  checkTime: 0.2
+  enemiesUpdated: 0
+  rangeModel: {fileID: 0}
+  cost: 100
+  upgrader: {fileID: 0}
+--- !u!114 &7435245308066870180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194569902107206972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7286d2999be8dda45b7c15672440f426, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerUpgradeController
+  rangeUpgrades: []
+  currentRangeUpgrade: 0
+  hasRangeUpgrade: 1
+  firerateUpgrades: []
+  currentFirerateUpgrade: 0
+  hasFirerateUpgrade: 1
+  fireRateText: 

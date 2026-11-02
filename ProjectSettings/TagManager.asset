@@ -13,10 +13,10 @@ TagManager:
   - Checkpoints
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Ground
+  - Path
+  - Tower
   - 
   - 
   - 

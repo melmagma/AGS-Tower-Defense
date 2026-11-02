@@ -75,20 +75,19 @@ public class BaseTower : MonoBehaviour
 
     private void OnMouseDown() //a method which is automatically called when unity detects that the player clicks on the collider.
     {
-        /* if (LevelManager.instance.levelActive)
-         {
+        if (LevelManager.instance.levelActive)
+        {
 
-             if (TowerManager.instance.selectedTower != null)
-             {
-                 TowerManager.instance.selectedTower.rangeModel.SetActive(false); //to prevent from selecting multiple towers at once
-             }
+            if (TowerManager.instance.selectedTower != null)
+            {
+                TowerManager.instance.selectedTower.rangeModel.SetActive(false); //to prevent from selecting multiple towers at once
+            }
 
-             TowerManager.instance.selectedTower = this;
+            TowerManager.instance.selectedTower = this;
 
-             UIManager.instance.OpenTowerUpgradePanel();
+            UIManager.instance.OpenTowerUpgradePanel();
 
-             TowerManager.instance.MoveTowerSelectionEffect(); //vfx to tell the player that this is the highlighted/ selected tower
-         } */ //i blanked this out bc we have no level manager n unity would NOT LOAD til it got fixed yo.
+            TowerManager.instance.MoveTowerSelectionEffect(); //vfx to tell the player that this is the highlighted/ selected tower
+        }
     }
 }
-       

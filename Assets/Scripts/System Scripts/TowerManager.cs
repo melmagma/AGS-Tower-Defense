@@ -87,7 +87,7 @@ public class TowerManager : MonoBehaviour
 
         isPlacing = true;
 
-        Destroy(indicator.gameObject); //removes the holographic/translucent view to actually place the tower
+        Destroy(indicator.gameObject); //removes the placeholder sphere for the actual model view to place the tower
         BaseTower placeTower = Instantiate(activeTower);
         placeTower.enabled = false;
         placeTower.GetComponent<Collider>().enabled = false; //disables thw tower script to stop it from scanning for enemies.
