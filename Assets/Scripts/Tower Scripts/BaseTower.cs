@@ -85,7 +85,7 @@ public class BaseTower : MonoBehaviour
 
             TowerManager.instance.selectedTower = this;
 
-            UIController.instance.OpenTowerUpgradePanel();
+            UIManager.instance.OpenTowerUpgradePanel();
 
             TowerManager.instance.MoveTowerSelectionEffect(); //vfx to tell the player that this is the highlighted/ selected tower
         }

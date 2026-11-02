@@ -1,44 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
+using UnityEngine.Serialization;
 
-public class TowerUpgradePanel : MonoBehaviour //notes and changes to be updated
+public class TowerUpgradePanel : MonoBehaviour
 {
-    public GameObject rangeButton, firerateButton;
-    public TMP_Text rangeText, firerateText;
+    [FormerlySerializedAs("rangeButton")] public GameObject path1Button; //formelyserialisedas is a way to rename the field without changing its values, which is helpful when making the upgrade system
+    [FormerlySerializedAs("firerateButton")] public GameObject path2Button;
+    [FormerlySerializedAs("rangeText")] public TMP_Text path1Text;
+    [FormerlySerializedAs("firerateText")] public TMP_Text path2Text;
+    [SerializeField] int CostOfSell;
 
     public void SetupPanel()
     {
-        if (TowerManager.instance.selectedTower.upgrader.hasRangeUpgrade)
-        {
-            TowerUpgradeController upgrader = TowerManager.instance.selectedTower.upgrader;
-            rangeText.text = "Upgrade\nRange\n(" + upgrader.rangeUpgrades[upgrader.currentRangeUpgrade].cost + "G)";
+        TowerUpgradeController upgrader = TowerManager.instance.selectedTower.upgrader;
 
-            rangeButton.SetActive(true);
+        if (upgrader.CanUpgrade)
+        {
+            path1Text.text = BuildButtonText(upgrader.paths[0]); // both paths are on offer until the player buys one.
+            path2Text.text = BuildButtonText(upgrader.paths[1]);
+
+            path1Button.SetActive(true);
+            path2Button.SetActive(true);
         }
         else
         {
-            rangeButton.SetActive(false);
+            path1Button.SetActive(false); // to prevent from re-upgrading the same dude 2wice
+            path2Button.SetActive(false);
         }
+    }
 
-        if (TowerManager.instance.selectedTower.upgrader.hasFirerateUpgrade)
-        {
-            TowerUpgradeController upgrader = TowerManager.instance.selectedTower.upgrader;
-            firerateText.text = upgrader.fireRateText + "(" + upgrader.firerateUpgrades[upgrader.currentFirerateUpgrade].cost + "G)";
-
-            firerateButton.SetActive(true);
-        }
-        else
-        {
-            firerateButton.SetActive(false);
-        }
+    // Shown on the button, e.g. "Flyer\n(235G)". path.description is also available if you want to show it.
+    private string BuildButtonText(UpgradePath path)
+    {
+        return path.pathName + "\n(" + path.cost + "G)";
     }
 
     public void RemoveTower()
     {
-        MoneyManager.instance.SpendMoney(-50);
+        MoneyManager.instance.SpendMoney(-CostOfSell);
 
         Destroy(TowerManager.instance.selectedTower.gameObject);
 
@@ -46,51 +45,33 @@ public class TowerUpgradePanel : MonoBehaviour //notes and changes to be updated
 
         AudioManager.instance.PlaySFX(9);
     }
-
-    public void UpgradeRange()
+    public void ChoosePath(int pathIndex)
     {
         TowerUpgradeController upgrader = TowerManager.instance.selectedTower.upgrader;
 
-        if (upgrader.hasRangeUpgrade)
+        if (!upgrader.CanUpgrade)
         {
-            if (MoneyManager.instance.SpendMoney(upgrader.rangeUpgrades[upgrader.currentRangeUpgrade].cost))
-            {
-                upgrader.UpgradeRange();
-
-                SetupPanel();
-
-                UIManager.instance.notEnoughMoneyWarning.SetActive(false);
-
-                AudioManager.instance.PlaySFX(10);
-            }
-            else
-            {
-                UIManager.instance.notEnoughMoneyWarning.SetActive(true);
-            }
-
+            return;
         }
-    }
 
-    public void UpgradeFireRate()
-    {
-        TowerUpgradeController upgrader = TowerManager.instance.selectedTower.upgrader;
-
-        if (upgrader.hasFirerateUpgrade)
+        if (pathIndex < 0 || pathIndex >= upgrader.paths.Length)
         {
-            if (MoneyManager.instance.SpendMoney(upgrader.firerateUpgrades[upgrader.currentFirerateUpgrade].cost))
-            {
-                upgrader.UpgradeFireRate();
+            return;
+        }
 
-                SetupPanel();
+        if (MoneyManager.instance.SpendMoney(upgrader.paths[pathIndex].cost))
+        {
+            upgrader.ChoosePath(pathIndex);
 
-                UIManager.instance.notEnoughMoneyWarning.SetActive(false);
+            SetupPanel();
 
-                AudioManager.instance.PlaySFX(10);
-            }
-            else
-            {
-                UIManager.instance.notEnoughMoneyWarning.SetActive(true);
-            }
+            UIManager.instance.notEnoughMoneyWarning.SetActive(false);
+
+            AudioManager.instance.PlaySFX(10);
+        }
+        else
+        {
+            UIManager.instance.notEnoughMoneyWarning.SetActive(true);
         }
     }
 }
