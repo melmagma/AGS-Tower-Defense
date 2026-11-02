@@ -59,6 +59,30 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+    public class TargetModeButton : MonoBehaviour //allow the player to click a button to change the target tracking of a tower.
+    {
+        public TMP_Text label;
+
+        public void OnClick()
+        {
+            BaseTower tower = TowerManager.instance.selectedTower;
+            if (tower == null) return;
+
+            tower.CycleTargetMode();
+            Refresh();
+        }
+
+        public void Refresh()
+        {
+            BaseTower tower = TowerManager.instance.selectedTower;
+            if (tower != null) label.text = tower.TargetModeLabel;
+        }
+
+        void OnEnable() => Refresh(); // updates the label whenever the panel opens
+    }
+
+
     public void StoreSelect() // this will most likely not be a seperate scene but a UI canvas
     {
         Time.timeScale = 1f; //if player presses pause , and then main menu or a level select, then time would remain frozen if not for this line of code.

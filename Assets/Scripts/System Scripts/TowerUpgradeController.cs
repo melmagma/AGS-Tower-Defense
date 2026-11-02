@@ -91,24 +91,6 @@ public class TowerUpgradeController : MonoBehaviour
         }
     }
 
-    // Returns the first T in this tower's hierarchy that is NOT part of the range circle,
-    // so swapping the mesh never turns the range visual into the tower.
-    private T FindTowerMesh<T>() where T : Component
-    {
-        foreach (T found in GetComponentsInChildren<T>())
-        {
-            bool isRangeVisual = theTower != null
-                && theTower.rangeModel != null
-                && found.transform.IsChildOf(theTower.rangeModel.transform);
-
-            if (!isRangeVisual)
-            {
-                return found;
-            }
-        }
-
-        return null;
-    }
 }
 
 [System.Serializable] // a data container that shows up on inspector but isnt its own monobehaviour.
@@ -119,7 +101,7 @@ public class UpgradePath // edlysia these are mostly for your ref
     public int cost;
 
     [Header ("Hit Type")]
-    public bool makeMultiHit; // this path switches the tower from single to multi or vice versa (i think)
+    public bool makeMultiHit;
     public float splashRadius; // final value, 0 = keep current (only used when multi)
 
     [Header("Stats (final values, not bonuses; 0 = keep current)")]

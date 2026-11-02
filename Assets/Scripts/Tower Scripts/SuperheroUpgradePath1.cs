@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // Add this to the tower prefab, leave it unticked, then drag it into Path 1's "Ability Script" slot.
@@ -5,7 +6,7 @@ public class SuperheroUpgradePath1 : TowerPathAbility
 {
     [Header("Reposition ability")]
     public float repositionCooldown = 15f;
-    public float landingDamage = 250f;
+    public int landingDamage = 250;
 
     [Header("Placement")]
     public Transform indicatorPrefab; // the ghost/hologram that follows the cursor while picking a landing spot
@@ -13,6 +14,9 @@ public class SuperheroUpgradePath1 : TowerPathAbility
     private float cooldownTimer;
     private bool isPlacing;
     private Transform indicator;
+
+
+    private readonly HashSet<EnemyController> enemiesHit = new HashSet<EnemyController>();// reused on every landing so we dont allocate a new set each time the ability is used
 
     public bool IsReady
     {
@@ -23,6 +27,8 @@ public class SuperheroUpgradePath1 : TowerPathAbility
     {
         get { return isPlacing; }
     }
+
+
 
     protected override void OnPathChosen()
     {
@@ -47,18 +53,11 @@ public class SuperheroUpgradePath1 : TowerPathAbility
     // Hook this up to your ability button. It starts the "pick where to land" mode.
     public void StartRepositionPlacement()
     {
-        if (!IsReady || isPlacing)
-        {
-            return;
-        }
+        if (!enabled || !IsReady || isPlacing || indicatorPrefab == null) return;
+        if (TowerManager.instance.isPlacing) return;
 
-        if (TowerManager.instance.isPlacing) //don't run two placement modes at the same time
-        {
-            return;
-        }
-
-        isPlacing = true;
         indicator = Instantiate(indicatorPrefab);
+        isPlacing = true; // only after the instantiate succeeded
     }
 
     // Same flow as TowerManager.Update(): follow the cursor, hide when invalid, left click confirms, right click cancels.
@@ -106,10 +105,9 @@ public class SuperheroUpgradePath1 : TowerPathAbility
         }
     }
 
-    // Called once the player has confirmed a valid spot.
-    public void RepositionTo(Vector3 landingSpot)
+    public void RepositionTo(Vector3 landingSpot) //when the player has a position that is good to place, then this is called
     {
-        if (!IsReady)
+        if (!IsReady || tower == null) //tower is only set by Activate(), so this also stops it running before the path is chosen
         {
             return;
         }
@@ -117,19 +115,32 @@ public class SuperheroUpgradePath1 : TowerPathAbility
         cooldownTimer = repositionCooldown;
         transform.position = landingSpot; // swap for a fly animation / coroutine later
 
-        // AOE on landing, using the tower's range as the blast radius.
-        Collider[] hits = Physics.OverlapSphere(transform.position, tower.range);
-        foreach (Collider hit in hits)
+        DealLandingDamage(landingSpot);
+    }
+
+    private void DealLandingDamage(Vector3 center) // AOE on landing, using the tower's range as the blast radius.
+    {
+        Collider[] hits = Physics.OverlapSphere(center, tower.range, tower.whatIsEnemy); //layermask detection for enemies only
+
+        enemiesHit.Clear();
+        foreach (Collider hit in hits) //for each loop to detech a collider of one enemy, = one enemy instead of if 2 colliders in 1 enemy = 2 enemies detected
         {
-            // Replace with however your enemies take damage, e.g.:
-            // Enemy enemy = hit.GetComponent<Enemy>();
-            // if (enemy != null) enemy.TakeDamage(landingDamage);
+            EnemyController enemy = hit.GetComponentInParent<EnemyController>(); //same lookup BaseTower uses when scanning
+            if (enemy != null)
+            {
+                enemiesHit.Add(enemy);
+            }
+        }
+
+        foreach (EnemyController enemy in enemiesHit)
+        {
+            enemy.TakeDamage(landingDamage);
         }
     }
 
-    // Cleans up the ghost if the script/tower gets disabled or destroyed mid-placement.
+
     void OnDisable()
     {
-        StopPlacement();
+        StopPlacement();// Cleans up the ghost if the script/tower gets disabled or destroyed mid-placement.
     }
 }
