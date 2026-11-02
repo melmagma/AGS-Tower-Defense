@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
 
     public GameObject towerButtons;
 
-    public string levelSelectScene, mainMenu, startMenu, credits, settingsMenu, shopMenu;
+    public string levelSelectScene, mainMenuScene;
 
     public GameObject pauseScreen; //add UI canvas for all these gameobjects (start of with 0 visibility/disabled)
 
@@ -70,33 +70,7 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        SceneManager.LoadScene("mainMenu");
-    }
-
-    public void StartMenu()
-    {
-        SceneManager.LoadScene("startMenu");
-    }
-
-    public void CreditsScene()
-    {
-        SceneManager.LoadScene("credits");
-    }
-
-    public void SettingsScene()
-    {
-        SceneManager.LoadScene("settingsMenu");
-    }
-
-    public void ShopScene()
-    {
-        SceneManager.LoadScene("shopMenu");
-    }
-
-    // i cant test this out so if it doesnt work ill change it to the index for each scene in the build profile
-    public void QuitGame()
-    {
-        Application.Quit();
+        SceneManager.LoadScene(mainMenuScene);
     }
 
     public void TryAgain()
