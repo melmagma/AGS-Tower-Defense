@@ -109,11 +109,11 @@ public class UIManager : MonoBehaviour
 
     public void OpenTowerUpgradePanel()
     {
-        //if (LevelManager.instance.levelActive)         to be changed (self note)
-        //{
-        //    towerUpgradePanel.gameObject.SetActive(true);
-        //    towerUpgradePanel.SetupPanel();
-        //}
+        if (LevelManager.instance.levelActive)
+        {
+            towerUpgradePanel.gameObject.SetActive(true);
+            towerUpgradePanel.SetupPanel();
+        }
     }
 
     public void CloseTowerUpgradePanel()

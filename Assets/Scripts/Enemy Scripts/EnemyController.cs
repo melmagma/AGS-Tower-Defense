@@ -15,6 +15,11 @@ public class EnemyController : MonoBehaviour
     [Header("Path")]
     [SerializeField] private List<GameObject> checkpoints = new List<GameObject>();
 
+    [Header("Reward")]
+    [SerializeField] private int goldReward = 10; // set per enemy type on the prefab
+
+    private bool isDead; // stops double payouts
+
     // Total ground covered so far (useful for tower targeting like "first" / "last")
     public float DistanceTravelled { get; private set; }
     public int CurrentHealth => currentHealth;
@@ -76,6 +81,8 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        if (isDead) return; //already dying, ignore extra hits
+
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
@@ -85,6 +92,11 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        isDead = true;
+
+        if (MoneyManager.instance != null)
+            MoneyManager.instance.GiveMoney(goldReward);
+
         Destroy(gameObject);
     }
 

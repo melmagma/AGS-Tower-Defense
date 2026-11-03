@@ -45,7 +45,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 20ac7c8a3732c0448a93047147b0790c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.519
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -56,7 +56,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -74,7 +74,7 @@ AudioSource:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0
+      value: 0.37756348
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -174,7 +174,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: e7ececaa6f44f804198300564cbaa6ac, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.542
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -335,7 +335,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: d58f728505e057a499a439aad965b2cd, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.66
+  m_Volume: 0.547
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -464,7 +464,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 0fa70f7a827a3e845bf01f08a6426e93, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.561
   m_Pitch: 1
   Loop: 0
   Mute: 0

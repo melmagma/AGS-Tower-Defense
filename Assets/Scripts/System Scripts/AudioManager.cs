@@ -72,7 +72,11 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(int sfxToPlay)
     {
-        sfx[sfxToPlay].Stop(); //makes sure the sfx plays from the start
-        sfx[sfxToPlay].Play();
+        AudioSource s = sfx[sfxToPlay];
+        s.Stop(); //make sure sfx plays from the start
+        s.Play();
+
+        Debug.Log($"sfx[{sfxToPlay}] -> object '{s.name}', clip '{(s.clip != null ? s.clip.name : "NONE")}', " +
+             $"vol {s.volume}, mute {s.mute}, enabled {s.isActiveAndEnabled}, playing {s.isPlaying}");
     }
 }
