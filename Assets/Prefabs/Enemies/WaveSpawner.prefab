@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8405606304588213164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 166866706843152830}
+  - component: {fileID: 246917436523970323}
+  m_Layer: 0
+  m_Name: WaveSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &166866706843152830
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405606304588213164}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.21, y: 3.02, z: 1.67803}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &246917436523970323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405606304588213164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb668c0aeedd3344fa356191332152ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  checkpoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  waves:
+  - name: 
+    groups:
+    - enemyPrefab: {fileID: 7386011504815737400, guid: d6cebbc5779f89544a79b988fc3661bc, type: 3}
+      count: 10
+      spawnInterval: 1
+      delayAfterGroup: 0
+    delayAfterWave: 10
+  - name: 
+    groups:
+    - enemyPrefab: {fileID: 7386011504815737400, guid: d6cebbc5779f89544a79b988fc3661bc, type: 3}
+      count: 8
+      spawnInterval: 0.8
+      delayAfterGroup: 0
+    - enemyPrefab: {fileID: 6827419642571646527, guid: f8a34db2cb452d448a64868446181e2d, type: 3}
+      count: 2
+      spawnInterval: 0.8
+      delayAfterGroup: 0
+    delayAfterWave: 10
+  - name: 
+    groups: []
+    delayAfterWave: 0
+  - name: 
+    groups: []
+    delayAfterWave: 0
+  - name: 
+    groups: []
+    delayAfterWave: 0
+  startDelay: 2
+  waitForWaveCleared: 0
