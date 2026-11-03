@@ -91,7 +91,11 @@ public class EnemyController : MonoBehaviour
     private void OnReachedEnd()
     {
         // TODO: damage the player's base, then remove the enemy
+        if (Fort.Instance != null)
+            Fort.Instance.TakeDamage(currentHealth);
+
         Destroy(gameObject);
+        
     }
 
 }
