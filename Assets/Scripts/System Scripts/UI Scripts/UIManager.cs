@@ -28,6 +28,8 @@ public class UIManager : MonoBehaviour
 
     public TMP_Text waveText;
 
+    [SerializeField] private DamageDealtDisplay damageDisplay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -112,7 +114,8 @@ public class UIManager : MonoBehaviour
         if (LevelManager.instance.levelActive)
         {
             towerUpgradePanel.gameObject.SetActive(true);
-            towerUpgradePanel.SetupPanel();
+            damageDisplay.SetTower(TowerManager.instance.selectedTower);
+        towerUpgradePanel.SetupPanel();
         }
     }
 

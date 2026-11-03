@@ -44,6 +44,17 @@ public class BaseTower : MonoBehaviour
     [HideInInspector] public int synergyCount; // same-tag towers in range, including itself
     [HideInInspector] public bool synergyActive;
 
+    [Header("Stats")]
+    [SerializeField] private int totalDamageDealt;
+    public int TotalDamageDealt => totalDamageDealt;
+    public event System.Action<int> OnTotalDamageChanged;
+
+    public void RegisterDamage(int amount)
+    {
+        totalDamageDealt += amount;
+        OnTotalDamageChanged?.Invoke(totalDamageDealt);
+    }
+
 
 
     // Start is called before the first frame update
@@ -87,7 +98,14 @@ public class BaseTower : MonoBehaviour
             rangeModel.transform.localScale = new Vector3(range, 1f, range); //the range radius model can be changed and scaled according to the range variable
         }
 
-        if (TowerManager.instance.selectedTower == this && Input.GetKeyDown(KeyCode.Tab)) CycleTargetMode(); //shortcut to cycle the selected tower only's target modes
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            TowerManager sel = TowerManager.instance;
+            bool isSelected = sel.selectedTower == this;
+            Debug.Log($"{name}: Tab pressed. isSelected={isSelected}, selectedTower={(sel.selectedTower != null ? sel.selectedTower.name : "none")}", this);
+
+            if (isSelected) CycleTargetMode();
+        }
     }
 
     public void CycleTargetMode() // toggleable targetmode method thats called when player presses on teh button from UIManager

@@ -247,6 +247,7 @@ MonoBehaviour:
   synergyTag: 1
   synergyCount: 0
   synergyActive: 0
+  totalDamageDealt: 0
 --- !u!114 &3097090136363863124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChompChomp
   meshRoot: {fileID: 8990184504634532539}
-  lungeSpeed: 2.5
+  lungeSpeed: 4
   returnSpeed: 1.5
   biteReach: 0.5
   maxLungeTime: 0.6

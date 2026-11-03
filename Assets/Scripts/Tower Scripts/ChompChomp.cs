@@ -123,18 +123,21 @@ public class ChompChomp : MonoBehaviour
         if (tower.hitType == BaseTower.HitType.Single)
         {
             primary.TakeDamage(dmg);
+            tower.RegisterDamage(dmg);
             return;
         }
 
-        // Multi: everything inside the splash radius around the bite point
         Collider[] hits = Physics.OverlapSphere(meshRoot.position, tower.splashRadius, tower.whatIsEnemy);
-        HashSet<EnemyController> alreadyHit = new HashSet<EnemyController>(); // one enemy can have several colliders
+        HashSet<EnemyController> alreadyHit = new HashSet<EnemyController>();
 
         foreach (Collider col in hits)
         {
             EnemyController e = col.GetComponentInParent<EnemyController>();
-            if (e != null && alreadyHit.Add(e)) e.TakeDamage(dmg);
-            Debug.Log("took damage" + dmg);
+            if (e != null && alreadyHit.Add(e))
+            {
+                e.TakeDamage(dmg);
+                tower.RegisterDamage(dmg); // each enemy hit by the splash counts separately
+            }
         }
     }
 
