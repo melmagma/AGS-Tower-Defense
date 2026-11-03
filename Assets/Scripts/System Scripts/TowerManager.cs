@@ -37,6 +37,11 @@ public class TowerManager : MonoBehaviour
         {
             indicator.position = GetGridPosition(); //this method is basically how the tower moves with the cursor
 
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                indicator.Rotate(0f, 90f, 0f, Space.World); // 90 deg per press if players want to rotate the placement
+            }
+
             RaycastHit hit;
             if (Input.mousePosition.y > Screen.height * (1f - (topSafePercent / 100f))) //disables the placement when the cursor goes to the UI
             {
@@ -59,7 +64,7 @@ public class TowerManager : MonoBehaviour
 
                         isPlacing = false;
 
-                        Instantiate(activeTower, indicator.position, activeTower.transform.rotation);
+                        Instantiate(activeTower, indicator.position, indicator.rotation);
 
                         indicator.gameObject.SetActive(false);
 

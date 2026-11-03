@@ -68,6 +68,7 @@ public class TowerUpgradeController : MonoBehaviour
     private void ApplyStats(UpgradePath path)
     {
         if (path.range > 0f) theTower.range = path.range; //these are the final values, not added ones, that replaces the old stats.
+        TowerSynergy.Recalculate(); //when range changes, recalculate whether the synergy of units affected has changed.
         if (path.fireRate > 0f) theTower.fireRate = path.fireRate; //if a value is at 0, it gets skipped. this is useful for towers where there arent changes in the stats.
         if (path.damage > 0f) theTower.damage = path.damage;
 

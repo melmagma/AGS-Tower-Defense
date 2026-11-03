@@ -60,9 +60,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 188820549886227964, guid: e9cab593657ede24eb7aa0783e549429, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ffff24e32ba4db4dbdba05e815955cc, type: 2}
     - target: {fileID: 919132149155446097, guid: e9cab593657ede24eb7aa0783e549429, type: 3}
       propertyPath: m_Name
       value: Can_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e9cab593657ede24eb7aa0783e549429, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545417240138202998, guid: e9cab593657ede24eb7aa0783e549429, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -74,6 +86,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e9cab593657ede24eb7aa0783e549429, type: 3}
       insertIndex: -1
       addedObject: {fileID: -424162411300377683}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e9cab593657ede24eb7aa0783e549429, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1764103514174191444}
   m_SourcePrefab: {fileID: 100100000, guid: e9cab593657ede24eb7aa0783e549429, type: 3}
 --- !u!1 &4915690110099822222 stripped
 GameObject:
@@ -92,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebae3f8113d5954dbf93d4ca9e10e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  speed: 1
+  speed: 0.8
   turnSpeed: 360
   maxHealth: 50
   checkpoints: []
@@ -118,3 +133,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!136 &1764103514174191444
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4915690110099822222}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.002570874
+  m_Height: 0.008449969
+  m_Direction: 1
+  m_Center: {x: 0.00006149169, y: -0.00022518946, z: -0.00019889922}

@@ -36,12 +36,25 @@ public class BaseTower : MonoBehaviour
     [HideInInspector]
     public TowerUpgradeController upgrader; //reference to the upgrade script
 
+    public enum SynergyTag { None, Stationery, Figurines, Electronics }
+
+    [Header("Synergy")]
+    public SynergyTag synergyTag = SynergyTag.None;
+
+    [HideInInspector] public int synergyCount; // same-tag towers in range, including itself
+    [HideInInspector] public bool synergyActive;
+
+    public int[] synergySFX = new int[] { 0, 1, 2 };
+
     // Start is called before the first frame update
     void Start()
     {
         checkCounter = checkTime; //set the timer to the full value
 
         upgrader = GetComponent<TowerUpgradeController>(); //automatically fetches the towerupgrade script. 
+
+        TowerSynergy.Register(this);
+
     }
 
     // Update is called once per frame
@@ -65,6 +78,8 @@ public class BaseTower : MonoBehaviour
             }
 
             enemiesUpdated = true; //to update the bool and signal a new list of enemies within range.
+
+            Debug.Log($"{name}: mask={whatIsEnemy.value}, colliders={colliderInRange.Length}, enemies={enemiesInRange.Count}, fireRate={fireRate}", this);
         }
 
         if (TowerManager.instance.selectedTower == this) //when i click and select the tower, toggle visibility for the tower's range radius
@@ -128,5 +143,45 @@ public class BaseTower : MonoBehaviour
         }
 
         return best;
+    }
+
+    void OnDrawGizmos()
+    {
+        bool hasEnemies = enemiesInRange != null && enemiesInRange.Count > 0;
+
+        Gizmos.color = hasEnemies ? Color.green : Color.red;
+        Gizmos.DrawWireSphere(transform.position, range);
+
+        if (hasEnemies)
+        {
+            Gizmos.color = Color.yellow;
+            foreach (EnemyController e in enemiesInRange)
+                if (e != null) Gizmos.DrawLine(transform.position, e.transform.position);
+        }
+    }
+
+    public bool SetSynergy(int count, bool active)
+    {
+        synergyCount = count;
+        if (active == synergyActive) return false;
+
+        synergyActive = active;
+
+        // TODO: apply / remove the real bonus here
+        Debug.Log($"{name} synergy {(active ? "ACTIVE" : "inactive")} ({synergyTag}, {count}/{TowerSynergy.RequiredCount})", this);
+
+        return active;
+    }
+
+    public void PlaySynergySFX(int order)
+    {
+        if (AudioManager.instance == null || synergySFX == null || synergySFX.Length == 0) return;
+
+        AudioManager.instance.PlaySFX(synergySFX[order % synergySFX.Length]); // % wraps around if more than 3 enter at once
+    }
+
+    void OnDestroy()
+    {
+        TowerSynergy.Unregister(this);
     }
 }
