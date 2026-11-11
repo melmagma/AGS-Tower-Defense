@@ -1,8 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static System.TimeZoneInfo;
-using static UnityEditor.Profiling.HierarchyFrameDataView;
-
 public enum ViewMode
 {
     ThreeQuarter,
